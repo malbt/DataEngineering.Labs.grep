@@ -12,36 +12,35 @@ Inside of the data directory there is a file called "transaction_data_daily_even
 
 Use grep to find all instances where the upload was initiated. 
 ```
-PROVIDE A SOLUTION HERE
+ grep -r -p "st" transaction_data_daily_event_log_20190129.dat
 ```
 
 Once you've reviewed these results, repeat the process but this time using the -c flag to determine how many matching occurences were found.
 ```
-PROVIDE A SOLUTION HERE
+ grep -r -c "st" transaction_data_daily_event_log_20190129.dat
 ```
 
 
 Use grep to find all instances where the upload was successful. 
 ```
-PROVIDE A SOLUTION HERE
+ggrep complete transaction_data_daily_event_log_20190129.dat
 ```
 
 Once you've reviewed these results, determine how many matching occurrences were found. This time instead of using the -c flag, pipe the result to the wc program.
 ```
-PROVIDE A SOLUTION HERE
+ggrep complete transaction_data_daily_event_log_20190129.dat | wc -l
 ```
 
 
 Use grep to find all instances where the upload failed. Ensure your output displays the line numbers for each match.
 
-```
-PROVIDE A SOLUTION HERE
+ggrep failure -nP transaction_data_daily_event_log_20190129.dat
 ```
 
 Upon review, we would like to only view failures with error code SYSOFFLINE or WEAKSIGNAL.
 
 ```
-PROVIDE A SOLUTION HERE
+ggrep -E 'SYSOFFLINE|WEAKSIGNAL' transaction_data_daily_event_log_20190129.dat
 ```
 
 
@@ -51,13 +50,13 @@ Inside the data directory, there is a file called "users.csv". This file contain
 
 Identify users that have email addresses with six or less characters before the @ symbol where none of these characters are numbers.
 ```
-PROVIDE A SOLUTION HERE
+ggrep ",[a-zA-Z]\{6\}@" users.csv
 ```
 
 
 Marketing research has shown that the paper business is picking up in the academia space. Corporate has requested a list of all registered users that have an edu emaill address. Use grep to find the appropriate lines and output the results to a file called academia_users.txt.
 ```
-PROVIDE A SOLUTION HERE
+ggrep -r "\.edu" users.csv > academia_users.txt
 ```
 
 
@@ -67,7 +66,7 @@ Ryan Howard did a poor job and used the CC field rather than the BCC field for t
 
 Use grep to identify the user with a single regex pattern.
 ```
-PROVIDE A SOLUTION HERE
+awk -F',' '$5 ~ /184/ { print $1,$2,$3,$5,$6 }' users.csv
 ```
 
 
@@ -98,5 +97,5 @@ This regex expression will ultimately be part of an automated data pipeline so w
 * Each field must be separated by a tab character.
 
 ```
-PROVIDE A SOLUTION HERE
+
 ```
